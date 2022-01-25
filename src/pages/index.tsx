@@ -1,3 +1,4 @@
+import Button from "../components/Button/Button";
 import Layout from "../components/Layout/Layout";
 import Table from "../components/Table/Table";
 import Customer from "../core/Customer/Customer";
@@ -26,6 +27,9 @@ export default function Home() {
     `}
     >
       <Layout title="Cadastro simples">
+        <div className="flex justify-end">
+          <Button className="mb-4">Novo cliente</Button>
+        </div>
         <Table
           customer={customer}
           selectedCustomer={selectedCustomer}
