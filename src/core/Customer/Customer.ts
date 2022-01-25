@@ -1,3 +1,8 @@
+//  export interface Customer {
+//    id: string;
+//    name: string;
+//    age: number;
+//  }
 export default class Customer {
   #id: string;
   #name: string;
