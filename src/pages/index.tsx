@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Button from "../components/Button/Button";
+import { Form } from "../components/Forms/Form";
 import Layout from "../components/Layout/Layout";
 import Table from "../components/Table/Table";
 import Customer from "../core/Customer/Customer";
@@ -18,6 +20,13 @@ export default function Home() {
   function deletedCustomer(customer: Customer) {
     console.log(`Excluindo... ${customer.name}`);
   }
+
+  function handleCustomer(customer: Customer) {
+    console.log(customer);
+  }
+
+  const [visible, setVisible] = useState<"table" | "form">("table");
+
   return (
     <div
       className={`
@@ -27,14 +36,26 @@ export default function Home() {
     `}
     >
       <Layout title="Cadastro simples">
-        <div className="flex justify-end">
-          <Button className="mb-4">Novo cliente</Button>
-        </div>
-        <Table
-          customer={customer}
-          selectedCustomer={selectedCustomer}
-          deletedCustomer={deletedCustomer}
-        />
+        {visible === "table" ? (
+          <>
+            <div className="flex justify-end">
+              <Button className="mb-4" onClick={() => setVisible("form")}>
+                Novo cliente
+              </Button>
+            </div>
+            <Table
+              customer={customer}
+              selectedCustomer={selectedCustomer}
+              deletedCustomer={deletedCustomer}
+            />
+          </>
+        ) : (
+          <Form
+            customer={customer[2]}
+            customerChange={handleCustomer}
+            cancelled={() => setVisible("table")}
+          />
+        )}
       </Layout>
     </div>
   );
